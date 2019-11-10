@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		let str = prompt("请输入待检测字符串","")
+		let checkChar = prompt("请输入待检测单字符：","")
+		let initLength = str.length
+		let count = 0
+		let locationArr = []
+
+		// 核心 initLength - str.length 意思是加上被截去的长度
+		// str.length每一轮循环都在变化
+		for (let i = 0; i < initLength; i++) {
+			if (str.search(checkChar) !== -1) {
+				count++
+				// console.log(str.search('f'))
+				if (str.search(checkChar) === 0 && i === 0) {
+					locationArr.push(parseInt(str.search(checkChar)) + 1)
+				} else {
+					locationArr.push(parseInt(str.search(checkChar)) + initLength - str.length + 1)
+				}
+				str = str.substr(parseInt(str.search(checkChar)) + 1, str.length)
+				console.log(str)	
+			}
+		}
+		alert("字符数量为：" + count + "  对应位置为：" + locationArr)
+		// console.log(count)
+		// console.log(locationArr)
+	</script>
+</body>
+</html>

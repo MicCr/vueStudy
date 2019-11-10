@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS3实现的页面平滑过渡的效果</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link href="http://fonts.googleapis.com/css?family=Josefin+Slab:400,700" rel="stylesheet" type="text/css"/>
+	<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="st-container">
+			<!-- 导航 -->
+			<input type="radio" name="radio-set" checked="checked" id="st-control-1">
+			<a href="#st-panel-1">Serendipity 1</a>
+			<input type="radio" name="radio-set" id="st-control-2">
+			<a href="#st-panel-2">Serendipity 2</a>
+			<input type="radio" name="radio-set" id="st-control-3">
+			<a href="#st-panel-3">Serendipity 3</a>
+			<input type="radio" name="radio-set" id="st-control-4">
+			<a href="#st-panel-4">Serendipity 4</a>
+			<input type="radio" name="radio-set" id="st-control-5">
+			<a href="#st-panel-5">Serendipity 5</a>
+			<!-- 内容 -->
+			<div class="st-scroll">
+				<section class="st-panel" id="st-panel-1">
+					<div class="st-sesc" data-icon="H"></div>
+					<h2>Serendipity 1</h2>
+					<p>这是内容</p>
+				</section>
+				<section class="st-panel st-color" id="st-panel-2">
+					<div class="st-sesc" data-icon="H"></div>
+					<h2>Serendipity 2</h2>
+					<p>这是内容</p>
+				</section> 
+				<section class="st-panel" id="st-panel-3">
+					<div class="st-sesc" data-icon="H"></div>
+					<h2>Serendipity 3</h2>
+					<p>这是内容</p>
+				</section> 
+				<section class="st-panel st-color" id="st-panel-4">
+					<div class="st-sesc" data-icon="H"></div>
+					<h2>Serendipity 4</h2>
+					<p>这是内容</p>
+				</section> 
+				<section class="st-panel" id="st-panel-5">
+					<div class="st-sesc" data-icon="H"></div>
+					<h2>Serendipity 5</h2>
+					<p>这是内容</p>
+				</section>  
+			</div>
+		</div>
+	</div>
+</body>
+</html>
