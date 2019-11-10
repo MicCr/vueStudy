@@ -1,14 +1,44 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+// import viewsLazyload from '../common/js/router.js'
+// import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: Home
+    name: 'index',
+    redirect: '/calculator',
+    component: () => import('../views/index')
+    // component: viewsLazyload('index')
+  },
+  {
+    path: '/calculator',
+    name: '固定金额复利',
+    redirect: '/calculator/fixedAmount',
+    component: () => import('../views/index'),
+    children: [
+      {
+        path: '/calculator/fixedAmount',
+        component: () => import('../components/calculator/fixedAmount')
+      },
+      {
+        path: '/calculator/monthBenefit',
+        component: () => import('../components/HelloWorld')
+      }
+    ]
+  },
+  {
+    path: '/benefitTable',
+    name: '复利表',
+    component: () => import('../views/index'),
+    children: [
+      {
+        path: '/benefitTable/tableByYear',
+        component: () => import('../components/HelloWorld')
+      }
+    ]
   },
   {
     path: '/about',
@@ -22,7 +52,8 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
+  base: 'index',
+  // base: process.env.BASE_URL,
   routes
 })
 
