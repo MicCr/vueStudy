@@ -36,8 +36,8 @@
             </Col>
             <Col span="14">
               <div class="resultArea">
-                <p class="fontStyle floatLeft">复利金额为：<span class="benefitFont">{{this.benefit}}</span></p>
-                <p class="fontStyle">总金额为：<span class="amountAndBenefitFont">{{this.amountAndBenefit}}</span></p>
+                <p class="fontStyle">复利金额：<span class="benefitFont">{{this.benefit}}</span></p>
+                <p class="fontStyle">本息和：<span class="amountAndBenefitFont">{{this.amountAndBenefit}}</span></p>
               </div>
             </Col>
         </Row>
@@ -57,17 +57,31 @@ export default {
   methods: {
     fixedBenefitCal () {
       if (this.amount && this.time && this.rate) {
-        if (this.rate.search('%') !== -1) {
-          this.rate = this.rate.substr(0, this.rate.length - 1) / 100
+        console.log(parseInt(this.rate))
+        if (isNaN(parseFloat(this.amount)) || isNaN(parseInt(this.time)) || isNaN(this.rate.substr(0, this.rate.length - 1))) {
+          this.$Message.warning('_(:τ」∠)_ 不要皮哦~')
+          this.benefit = '你看看你输的啥！'
+          this.amountAndBenefit = '_(:τ」∠)_ 不会算 告辞'
+        } else {
+          if (this.rate > 1) {
+            this.$Message.warning('利率大于100% ！？ 你怎么不上天')
+          } else {
+            // 百分号处理
+            if (this.rate.search('%') !== -1) {
+              // console.log(this.rate)
+              this.rate = this.rate.substr(0, this.rate.length - 1) / 100
+            }
+            this.benefit = this.amount * Math.pow(1 + parseFloat(this.rate), this.time) - this.amount
+            this.benefit = this.benefit.toFixed(2)
+            this.amountAndBenefit = this.amount * Math.pow(1 + parseFloat(this.rate), this.time)
+            this.amountAndBenefit = this.amountAndBenefit.toFixed(2)
+            // 将rate值重新变为百分比字符串 使其正常调用search方法保证多次计算
+            this.rate = (this.rate * 100 + '%').toString()
+          }
         }
-        this.benefit = this.amount * Math.pow(1 + parseFloat(this.rate), this.time) - this.amount
-        this.benefit = this.benefit.toFixed(2)
-        this.amountAndBenefit = this.amount * Math.pow(1 + parseFloat(this.rate), this.time)
-        this.amountAndBenefit = this.amountAndBenefit.toFixed(2)
       } else {
-        this.$Message.error('请填写数据')
+        this.$Message.error('数据填了吗！')
       }
-      console.log(this.benefit)
     },
     reset () {
       this.amount = ''
@@ -82,7 +96,6 @@ export default {
 <style lang="less" scoped>
 .wrap-content {
     padding: 20px;
-    width: 1200px;
     .itemInput {
         display: block;
         margin-top: 15px;
@@ -90,7 +103,7 @@ export default {
     }
     .fontStyle {
         height: 80px;
-        width: 500px;
+        min-width: 500px;
         font-size: 30px;
         font-weight: 700;
     }
@@ -98,7 +111,7 @@ export default {
         float: left;
     }
     .resultArea {
-      width: 500px;
+      min-width: 500px;
       height: 220px;
     }
     .benefitFont {

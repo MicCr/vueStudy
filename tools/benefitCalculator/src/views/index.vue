@@ -26,7 +26,7 @@
             </Header>
             <Layout>
                 <Sider hide-trigger :style="{background: '#fff'}">
-                    <Menu active-name="1-2" theme="light" width="auto" :open-names="['1']">
+                    <Menu active-name="1-1" theme="light" width="auto" :open-names="['1']">
                         <Submenu name="1">
                             <template slot="title">
                                 <Icon type="ios-navigate"></Icon>
@@ -34,14 +34,15 @@
                             </template>
                             <MenuItem name="1-1" to="/calculator/fixedAmount">固定金额复利</MenuItem>
                             <MenuItem name="1-2" to="/calculator/monthBenefit">月度理财收益</MenuItem>
-                            <MenuItem name="1-3">Option 3</MenuItem>
+                            <!-- <MenuItem name="1-3">Option 3</MenuItem> -->
                         </Submenu>
                         <Submenu name="2">
                             <template slot="title">
                                 <Icon type="ios-keypad"></Icon>
                                 复利表
                             </template>
-                            <MenuItem name="2-1" to="/benefitTable/tableByYear">年度复利表</MenuItem>
+                            <MenuItem name="2-1" to="/benefitTable/tableByYear">年化复利分析</MenuItem>
+                            <MenuItem name="2-1" to="/benefitTable/tableByYear">多值复利对比</MenuItem>
                         </Submenu>
                         <Submenu name="3">
                             <template slot="title">

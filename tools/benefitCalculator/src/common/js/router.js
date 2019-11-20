@@ -1,4 +1,4 @@
-const viewsLazyload = (name) => (resolve) => require([`views/${name}`], resolve)
+const viewsLazyload = (name) => (resolve) => require([`${name}`], resolve)
 
 export {
   viewsLazyload
