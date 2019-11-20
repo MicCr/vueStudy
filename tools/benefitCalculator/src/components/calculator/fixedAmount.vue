@@ -3,7 +3,7 @@
     <div class="wrap-content">
         <Row>
             <Col span="8">
-                <div>
+                <div class="formInput">
                     <Input 
                         prefix="ios-card" 
                         placeholder="请输入本金" 
@@ -19,20 +19,25 @@
                         placeholder="请输入年化利率（%）" 
                         class="itemInput"
                         v-model="rate"/>
-                </div>
-                <div style="margin-top:30px">
-                    <Button 
-                        type="primary" 
-                        style="margin-left:-50px" 
-                        @click="fixedBenefitCal()">计算</Button>
-                    <Button 
-                      style="margin-left:50px"
-                      @click="reset()"
-                      >重置</Button>
-                </div>   
+                    <div style="margin-top:30px">
+                        <Button 
+                            type="primary" 
+                            @click="fixedBenefitCal()">
+                            计算
+                        </Button>
+                        <Button 
+                          style="margin-left:50px"
+                          @click="reset()"
+                          >
+                          重置
+                        </Button>
+                    </div>      
+                </div> 
             </Col>
             <Col span="2">
-                <Divider type="vertical" style="height:200px"/>
+                <div class="divideLine">
+                    <Divider type="vertical" style="height:200px"/>
+                </div>
             </Col>
             <Col span="14">
               <div class="resultArea">
@@ -56,8 +61,10 @@ export default {
   },
   methods: {
     fixedBenefitCal () {
+      // 空值判定
       if (this.amount && this.time && this.rate) {
-        console.log(parseInt(this.rate))
+        // 判断本金 时间 年化利率的输入值是否符合规定
+        // 年利率的判断逻辑为 删除最后一位后还是字符串 说明填的值有毒
         if (isNaN(parseFloat(this.amount)) || isNaN(parseInt(this.time)) || isNaN(this.rate.substr(0, this.rate.length - 1))) {
           this.$Message.warning('_(:τ」∠)_ 不要皮哦~')
           this.benefit = '你看看你输的啥！'
@@ -68,7 +75,6 @@ export default {
           } else {
             // 百分号处理
             if (this.rate.search('%') !== -1) {
-              // console.log(this.rate)
               this.rate = this.rate.substr(0, this.rate.length - 1) / 100
             }
             this.benefit = this.amount * Math.pow(1 + parseFloat(this.rate), this.time) - this.amount
@@ -95,11 +101,20 @@ export default {
 </script>
 <style lang="less" scoped>
 .wrap-content {
-    padding: 20px;
-    .itemInput {
+    overflow: auto;
+    min-width: 1000px;
+    .formInput {
+      min-width: 300px;
+      text-align: center;
+      .itemInput {
+        margin: 0 auto;
         display: block;
         margin-top: 15px;
         width: 300px;
+      }
+    }
+    .divideLine {
+      min-width: 30px;
     }
     .fontStyle {
         height: 80px;
@@ -112,6 +127,7 @@ export default {
     }
     .resultArea {
       min-width: 500px;
+      margin-top: 20px;
       height: 220px;
     }
     .benefitFont {

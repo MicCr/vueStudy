@@ -42,7 +42,7 @@
                                 复利表
                             </template>
                             <MenuItem name="2-1" to="/benefitTable/tableByYear">年化复利分析</MenuItem>
-                            <MenuItem name="2-1" to="/benefitTable/tableByYear">多值复利对比</MenuItem>
+                            <MenuItem name="2-2" to="/benefitTable/tableByYear">多值复利对比</MenuItem>
                         </Submenu>
                         <Submenu name="3">
                             <template slot="title">
@@ -75,11 +75,11 @@ export default {
 </script>
 <style lang="less" scoped>
 .layout{
+    min-width: 1200px;
     border: 1px solid #d7dde4;
     background: #f5f7f9;
     position: relative;
     border-radius: 4px;
-    overflow: hidden;
 }
 .layout-logo{
     width: 100px;
